@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1022756281840",
+    "project_id": "parkingpulse-4e8ac",
+    "storage_bucket": "parkingpulse-4e8ac.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022756281840:android:dd467a3abb42c973d6d135",
+        "android_client_info": {
+          "package_name": "com.example.parking_lot_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-b79QXXEeDjTbdFugL3wal3YqGltn__w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

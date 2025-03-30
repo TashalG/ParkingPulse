@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/danielsamoshkin/Documents/Flutter/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/danielsamoshkin/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/danielsamoshkin/Projects/parkingpulse/android/app/.cxx/Debug/6w3k46r3/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/danielsamoshkin/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/danielsamoshkin/Projects/parkingpulse/android/app/.cxx/Debug/6w3k46r3/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}
