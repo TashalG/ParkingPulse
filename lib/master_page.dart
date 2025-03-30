@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:parkingpulse/home_page.dart';
 
 class  MasterPage extends StatefulWidget {
   const MasterPage({super.key});
@@ -15,7 +16,7 @@ class _MasterPageState extends State< MasterPage> {
   
   List<StatelessWidget> getScreens(){
 
-    return [];//Different pages will be here
+    return [HomeWidget(),];//Different pages will be here
   }
   
   @override
