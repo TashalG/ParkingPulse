@@ -16,7 +16,7 @@ class _MasterPageState extends State< MasterPage> {
   
   List<StatelessWidget> getScreens(){
 
-    return [HomeWidget(),];//Different pages will be here
+    return [HomeWidget()];//Different pages will be here
   }
   
   @override

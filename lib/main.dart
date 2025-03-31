@@ -3,6 +3,8 @@ import 'package:parkingpulse/master_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:parkingpulse/auth/login_widget.dart';
 
+//Supabase
+import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 //Firebase
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -10,6 +12,7 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  //await Supabase.initialize(url: SUPABASE_URL, anonKey: SUPABASE_ANON_KEY,);
   runApp(ParkingApp());
 }
 
