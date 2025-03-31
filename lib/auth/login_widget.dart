@@ -44,7 +44,7 @@ class _LoginWjdgetState extends State<LoginWidget>  {
    Future<void> createUser(String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      _auth.currentUser?.uid;
+      DatabaseController.instance().createUserEntry(_auth.currentUser?.uid);
     } catch (e) {
       showDialog<void>(context: context,barrierDismissible: false,builder: (BuildContext context) {return AlertDialog(
         title: const Text("Error"),

@@ -12,12 +12,12 @@ class DatabaseController
 
   DatabaseController.instance();
 
-  createUserEntry(String uid) async
+  createUserEntry(String? uid) async
   {
     await supabase.from('app_user').insert({'user_id': uid, 'is_supervisor': false});
   }
 
-  Future<List>getUserEntry(String uid) async
+  Future<List>getUserEntry(String? uid) async
   {
     //TODO THIS IS NOT WORKING AS IT SHOULD
     final result = await supabase.from('app_user').select();
