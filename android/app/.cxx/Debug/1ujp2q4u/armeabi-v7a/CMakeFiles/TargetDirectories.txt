@@ -1,0 +1,2 @@
+D:/University/Assignments/DBMS MAIN/parkingpulse/parkingpulse/android/app/.cxx/Debug/1ujp2q4u/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/University/Assignments/DBMS MAIN/parkingpulse/parkingpulse/android/app/.cxx/Debug/1ujp2q4u/armeabi-v7a/CMakeFiles/rebuild_cache.dir

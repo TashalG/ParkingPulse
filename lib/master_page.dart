@@ -42,7 +42,7 @@ class _MasterPageState extends State< MasterPage> {
           });
         },
       ),
-      //body: getScreens()[_page]
+      body: getScreens()[_page]
     );
   }
 }
