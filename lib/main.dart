@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:parkingpulse/master_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:parkingpulse/auth/login_widget.dart';
-
+import 'package:flutter_stripe/flutter_stripe.dart';
 //Supabase
 import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 //Firebase
@@ -12,6 +12,7 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Stripe.publishableKey = "pk_test_51QRRqUCLU1FRGHEz8bUWNyXcEwFFfIixclMmw6iOv5wRXu2n9eGFx5FMPCLM13hBFiFDDqobRDE3Sc73sNxnTnXT00PkahKQ21";
   //await Supabase.initialize(url: SUPABASE_URL, anonKey: SUPABASE_ANON_KEY,);
   runApp(ParkingApp());
 }
