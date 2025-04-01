@@ -12,58 +12,9 @@ class DatabaseController
 
   DatabaseController.instance();
 
-  createUserEntry(String? uid) async
-  {
-    await supabase.from('app_user').insert({'user_id': uid, 'is_supervisor': false});
-  }
-
-  Future<List>getUserEntry(String? uid) async
-  {
-    //TODO THIS IS NOT WORKING AS IT SHOULD
-    final result = await supabase.from('app_user').select();
-    return result;
-  }
-
-  // User authentication methods
-
-  Future<void> signUp(String email, String password) async {
-    final response = await supabase.auth.signUp(
-      email: email,
-      password: password,
-    );
-
-    // Do you know why these have errors? im not quite sure if i did this correctly
-    if (response.error != null) {
-      print('Error: ${response.error!.message}');
-    } else {
-      print('User signed up: ${response.user!.email}');
-    }
-  }
-
-  Future<void> signIn(String email, String password) async {
-    final response = await supabase.auth.signInWithPassword(
-      email: email,
-      password: password,
-   );
-    if (response.error != null) {
-      print('Error: ${response.error!.message}');
-    } else {
-      print('User signed in: ${response.user!.email}');
-    }
-  }
-
-  Future<void> signOut() async {
-    final response = await supabase.auth.signOut();
-    if (response.error != null) {
-      print('Error: ${response.error!.message}');
-    } else {
-      print('User signed out');
-    }
-  }
-
   //User Profile Management methods
 
-  Future<void> createUserEntry(String userId) async {
+  createUserEntry(String? userId) async {
     final response = await supabase.from('app_user').insert({
       'user_id': userId,
       'is_supervisor': false,
@@ -75,17 +26,13 @@ class DatabaseController
     }
   }
 
-  Future<Map<String, dynamic>?> getUserProfile(String userId) async {
+  Future<Map<String, dynamic>> getUserEntry(String userId) async {
     final response = await supabase
        .from('app_user')
        .select()
        .eq('user_id', userId)
        .single();
-    if (response.error != null) {
-      print('Error: ${response.error!.message}');
-      return null;
-    }
-    return response.data;
+    return response;
   }
 
   //Parking Spot Management methods
@@ -95,11 +42,8 @@ class DatabaseController
       .from('parking_spots')
       .select()
       .eq('status', 'available');
-    if (response.error != null) {
-      print('Error: ${response.error!.message}');
-    return [];
-    }
-    return response.data as List<Map<String, dynamic>>;
+
+    return response;
   }
 
   Future<void> updateParkingSpotStatus(String spotId, String status) async {
@@ -113,11 +57,5 @@ class DatabaseController
       print('Parking spot status updated');
     }
   }
-
-
-
-
-
-
 
 }
