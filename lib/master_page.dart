@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:parkingpulse/home_page.dart';
 import 'package:parkingpulse/payment_page.dart';
 import 'package:parkingpulse/profile_page.dart';
+import 'package:parkingpulse/notifications_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:parkingpulse/controllers/database_controller.dart';
 
@@ -15,7 +16,7 @@ class MasterPage extends StatefulWidget {
 class _MasterPageState extends State< MasterPage> {
   _MasterPageState();
   final User user = FirebaseAuth.instance.currentUser as User;
-  List<Widget> screens = [HomeWidget(),PaymentWidget(),HomeWidget(),HomeWidget(),ProfileWidget()];
+  List<Widget> screens = [HomeWidget(),PaymentWidget(),HomeWidget(),NotificationsWidget(),ProfileWidget()];
   int _page = 0;
   
   void getScreens()async
@@ -25,7 +26,7 @@ class _MasterPageState extends State< MasterPage> {
     {
       screens =[ProfileWidget(),ProfileWidget(),ProfileWidget(),ProfileWidget(),ProfileWidget()];//supervisor pages
     }
-    screens =[HomeWidget(),PaymentWidget(),HomeWidget(),HomeWidget(),ProfileWidget()];
+    screens =[HomeWidget(),PaymentWidget(),HomeWidget(),NotificationsWidget(),ProfileWidget()];
   }
   
   @override

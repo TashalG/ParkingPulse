@@ -3,9 +3,10 @@ import 'package:parkingpulse/master_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:parkingpulse/auth/login_widget.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-//Supabase
 
+//Supabase
 import 'package:supabase_flutter/supabase_flutter.dart' hide User;
+
 //Firebase
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';

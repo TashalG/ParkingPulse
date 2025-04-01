@@ -8,7 +8,12 @@ class HomeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      body: GoogleMapWidget(),
+      body: Scaffold(
+        appBar: AppBar(
+          title: Text('Home'),
+        ),
+        body: GoogleMapWidget(),
+      ),
     );
   }
 }
