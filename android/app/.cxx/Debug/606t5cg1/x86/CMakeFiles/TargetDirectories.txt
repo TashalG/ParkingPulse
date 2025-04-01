@@ -1,0 +1,2 @@
+/Users/daniel.ht/Projects/DBMS_Project/ParkingPulse/android/app/.cxx/Debug/606t5cg1/x86/CMakeFiles/edit_cache.dir
+/Users/daniel.ht/Projects/DBMS_Project/ParkingPulse/android/app/.cxx/Debug/606t5cg1/x86/CMakeFiles/rebuild_cache.dir
