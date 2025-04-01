@@ -1,19 +1,25 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
-
 const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+const functions = require("firebase-functions");
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+const Stripe = require("stripe");
+const key = "sk_test_51QRRqUCLU1FRGHEzECKjSleYz5DoNzY4nTCZE8k5qV1c2l5oasAMrzbLFQtZi3P3YgVtmA5a8fKZIcjOrNKkboty00c9eOOs6F";
+const stripe = Stripe(key);
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+exports.stripePaymentIntentRequest = functions.https.onRequest(async (req, res) => {
+    const {body} = req;
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount:body?.amount, 
+        currency:body?.currency,
+        payment_method_types: ['card']
+    });
+  
+      res.status(200).send({
+        paymentIntent: paymentIntent.client_secret,
+        success: true,
+        id: paymentIntent.id
+      });
+    } catch (error) {
+      res.status(404).send({ success: false, error: error.message });
+    }
+  });

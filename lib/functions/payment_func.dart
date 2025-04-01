@@ -11,7 +11,7 @@ Future<void> initPayment({
 async {
   try{
     final response = await http.post(
-      Uri.parse("https://stripepaymentintentrequest-r77eefsxhq-uc.a.run.app"),
+      Uri.parse("http://10.0.2.2:5001/parkingpulse-4e8ac/us-central1/stripePaymentIntentRequest"),
       body: {
         'amount': amount,
         'currency': currency,
