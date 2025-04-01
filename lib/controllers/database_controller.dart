@@ -58,4 +58,20 @@ class DatabaseController
     }
   }
 
+  //upgrade to supervisor
+
+  Future<void> upgradeToSupervisor(String userId) async {
+    final response = await supabase
+      .from('app_user')
+      .update({'is_supervisor': true})
+      .eq('user_id', userId);
+    if (response.error != null) {
+      print('Error: ${response.error!.message}');
+    } else {
+      print('User upgraded to supervisor');
+    }
+  }
+
+
+
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:parkingpulse/controllers/database_controller.dart';
 
 class ProfileWidget extends StatelessWidget {
-  const ProfileWidget({super.key, required this.user});
-  final User? user;
+
+  final User user = FirebaseAuth.instance.currentUser as User;
 
   @override
   Widget build(BuildContext context) {

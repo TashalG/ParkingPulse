@@ -1,0 +1,2 @@
+/Users/danielsamoshkin/Projects/parkingpulse/android/app/.cxx/Debug/1z4w6312/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/danielsamoshkin/Projects/parkingpulse/android/app/.cxx/Debug/1z4w6312/armeabi-v7a/CMakeFiles/rebuild_cache.dir

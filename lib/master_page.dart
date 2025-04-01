@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:parkingpulse/home_page.dart';
+import 'package:parkingpulse/profile_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:parkingpulse/controllers/database_controller.dart';
 
 class  MasterPage extends StatefulWidget {
-  const MasterPage({super.key});
-
 
   @override
   State< MasterPage> createState() => _MasterPageState();
@@ -12,11 +13,18 @@ class  MasterPage extends StatefulWidget {
 
 class _MasterPageState extends State< MasterPage> {
   _MasterPageState();
+  final User user = FirebaseAuth.instance.currentUser as User;
+  List<StatelessWidget> screens = [HomeWidget(),HomeWidget(),HomeWidget(),HomeWidget(),ProfileWidget()];
   int _page = 0;
   
-  List<StatelessWidget> getScreens(){
-
-    return [HomeWidget()];//Different pages will be here
+  void getScreens()async
+  {
+    final temp = await DatabaseController.instance().getUserEntry(user.uid);
+    if(temp['is_supervisor']==true)
+    {
+      screens =[ProfileWidget(),ProfileWidget(),ProfileWidget(),ProfileWidget(),ProfileWidget()];//supervisor pages
+    }
+    screens =[HomeWidget(),HomeWidget(),HomeWidget(),HomeWidget(),ProfileWidget()];
   }
   
   @override
@@ -37,12 +45,13 @@ class _MasterPageState extends State< MasterPage> {
         ],
         onTap: (index) {
           setState(() {
+            getScreens();
             _page = index;
             
           });
         },
       ),
-      body: getScreens()[_page]
+      body: screens[_page]
     );
   }
 }
