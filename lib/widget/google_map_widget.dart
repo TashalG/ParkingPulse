@@ -22,16 +22,16 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
     final parkingList = await DatabaseController.instance().getAvailableParkingLots();
     for (var parkingLot in parkingList) 
     {
-      PlaceMarker(LatLng(parkingLot['latitude'] ,parkingLot['longitude']));
+      PlaceMarker(LatLng(parkingLot['latitude'] ,parkingLot['longitude']),parkingLot['adress']);
     }
   }
-  void PlaceMarker(LatLng position) {
+  void PlaceMarker(LatLng position, String _address) {
     final markerId = MarkerId(position.toString());
     final marker = Marker(
       markerId: markerId,
       position: position,
       infoWindow: InfoWindow(
-        title: "Parking Spot",
+        title: _address,
         snippet: "Lat: ${position.latitude}, Lng: ${position.longitude}",
       ),
     );
@@ -64,12 +64,8 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
           _mapController = controller;
         },
         onTap: (position) {
-          PlaceMarker(position); // Add a marker at the tapped position
+          //PlaceMarker(position); // Add a marker at the tapped position
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _removeMarker, // Clear all markers when pressed
-        child: const Icon(Icons.delete),
       ),
     );
   }
