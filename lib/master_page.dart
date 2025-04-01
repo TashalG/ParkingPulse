@@ -15,7 +15,7 @@ class MasterPage extends StatefulWidget {
 class _MasterPageState extends State< MasterPage> {
   _MasterPageState();
   final User user = FirebaseAuth.instance.currentUser as User;
-  List<StatelessWidget> screens = [HomeWidget(),PaymentWidget(),HomeWidget(),HomeWidget(),ProfileWidget()];
+  List<Widget> screens = [HomeWidget(),PaymentWidget(),HomeWidget(),HomeWidget(),ProfileWidget()];
   int _page = 0;
   
   void getScreens()async

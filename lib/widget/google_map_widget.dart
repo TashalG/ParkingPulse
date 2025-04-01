@@ -5,9 +5,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:parkingpulse/controllers/database_controller.dart';
 
 class GoogleMapWidget extends StatefulWidget {
-  const GoogleMapWidget({Key? key}) : super(key: key);
+  GoogleMapWidget({Key? key}) : super(key: key);
+  late int activeMarker = -1;
 
   @override
+  int getCurrentMarkerId()
+  {
+    return activeMarker;
+  }
   State<GoogleMapWidget> createState() => _GoogleMapWidgetState();
 }
 
@@ -15,7 +20,6 @@ class GoogleMapWidget extends StatefulWidget {
 class _GoogleMapWidgetState extends State<GoogleMapWidget> {
   late GoogleMapController _mapController;
   final Set<Marker> _markers = {};
-  late int activeMarker = -1;
   
   final LatLng _initialPosition = const LatLng(45.0918, -64.3598); // Default to Wolfville, NS
 
@@ -35,20 +39,17 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
       infoWindow: InfoWindow(
         title: _address,
         snippet: "Available Spots: "+_spots.toString(),
+      ),
       onTap: () 
       {
-        activeMarker = _lotId;
-      }
-      ),
+        print(_lotId);
+        widget.activeMarker = _lotId;
+      },
     );
 
     setState(() {
       _markers.add(marker);
     });
-  }
-  int getCurrentMarkerId()
-  {
-    return activeMarker;
   }
 
   void _removeMarker() {

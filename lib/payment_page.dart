@@ -3,8 +3,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:parkingpulse/widget/google_map_widget.dart';
 
 
-class PaymentWidget extends StatelessWidget {
-  const PaymentWidget({super.key});
+class PaymentWidget extends StatefulWidget {
+  @override
+  State<PaymentWidget> createState() => _PaymentWidgetState();
+}
+
+class _PaymentWidgetState extends State<PaymentWidget> {
+  final GoogleMapWidget mapWidget = GoogleMapWidget();
+  int lotId = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +23,12 @@ class PaymentWidget extends StatelessWidget {
           children: [
             ConstrainedBox(
               constraints: BoxConstraints.expand(height: 600, width: 370),
-              child: GoogleMapWidget()
+              child: mapWidget
             ),
             Row(
               children: [
                 SizedBox(width: 20),
-                Text('Spot Availability: '),
+                Text('Spot ID: $lotId'),
                 Text('placeholder') // TODO
               ],
             ),
@@ -36,7 +42,9 @@ class PaymentWidget extends StatelessWidget {
             SizedBox(height: 20,),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentInfoWidget()));
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentInfoWidget()));
+                lotId = mapWidget.getCurrentMarkerId();
+                setState((){});
               },
               child: Text('Purchase Ticket'),
             )
@@ -55,6 +63,15 @@ class PaymentInfoWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Payment Information'),
+      ),
+      body: Column(
+        children: [
+          DropdownMenu(
+            dropdownMenuEntries: [
+              DropdownMenuEntry(label: 'temp', value: 2)
+            ],
+          ),
+        ],
       ),
     );
   }
