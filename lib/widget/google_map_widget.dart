@@ -11,10 +11,12 @@ class GoogleMapWidget extends StatefulWidget {
   State<GoogleMapWidget> createState() => _GoogleMapWidgetState();
 }
 
+
 class _GoogleMapWidgetState extends State<GoogleMapWidget> {
   late GoogleMapController _mapController;
   final Set<Marker> _markers = {};
-
+  late int activeMarker = -1;
+  
   final LatLng _initialPosition = const LatLng(45.0918, -64.3598); // Default to Wolfville, NS
 
   getMarkers() async
@@ -22,23 +24,31 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
     final parkingList = await DatabaseController.instance().getAvailableParkingLots();
     for (var parkingLot in parkingList) 
     {
-      PlaceMarker(LatLng(parkingLot['latitude'] ,parkingLot['longitude']),parkingLot['address']);
+      PlaceMarker(LatLng(parkingLot['latitude'] ,parkingLot['longitude']),parkingLot['address'],parkingLot['available_spots'], parkingLot['lot_id'] );
     }
   }
-  void PlaceMarker(LatLng position, String _address) {
-    final markerId = MarkerId(position.toString());
+  void PlaceMarker(LatLng position, String _address, int _spots, int _lotId) {
+    final markerId = MarkerId(_lotId.toString());
     final marker = Marker(
       markerId: markerId,
       position: position,
       infoWindow: InfoWindow(
         title: _address,
-        snippet: "Lat: ${position.latitude}, Lng: ${position.longitude}",
+        snippet: "Available Spots: "+_spots.toString(),
+      onTap: () 
+      {
+        activeMarker = _lotId;
+      }
       ),
     );
 
     setState(() {
       _markers.add(marker);
     });
+  }
+  int getCurrentMarkerId()
+  {
+    return activeMarker;
   }
 
   void _removeMarker() {
