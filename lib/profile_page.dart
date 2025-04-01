@@ -9,13 +9,29 @@ class ProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     return Center(
-      child:  ElevatedButton(
-        //TODO
-              onPressed: () {
-                _auth.signOut();
-              },
-              child: Text('Log Out'),
-        )
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              _auth.signOut();
+            },
+            child: Text('Log Out'),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () async {
+              if (user != null) {
+                await DatabaseController.controller.upgradeToSupervisor(user!.uid);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Profile upgraded to supervisor!')),
+                );
+              }
+            },
+            child: Text('Upgrade to Supervisor'),
+          ),
+        ],
+      ),
     );
   }
 }
