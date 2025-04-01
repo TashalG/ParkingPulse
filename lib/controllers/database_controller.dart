@@ -37,11 +37,10 @@ class DatabaseController
 
   //Parking Spot Management methods
 
-  Future<List<Map<String, dynamic>>> getAvailableParkingSpots() async {
+  Future<List<Map<String, dynamic>>> getAvailableParkingLots() async {
     final response = await supabase
-      .from('parking_spots')
-      .select()
-      .eq('status', 'available');
+      .from('parking_lot')
+      .select();
 
     return response;
   }

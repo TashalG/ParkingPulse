@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:parkingpulse/controllers/database_controller.dart';
 
 class GoogleMapWidget extends StatefulWidget {
   const GoogleMapWidget({Key? key}) : super(key: key);
@@ -11,9 +14,18 @@ class GoogleMapWidget extends StatefulWidget {
 class _GoogleMapWidgetState extends State<GoogleMapWidget> {
   late GoogleMapController _mapController;
   final Set<Marker> _markers = {};
+
   final LatLng _initialPosition = const LatLng(45.0918, -64.3598); // Default to Wolfville, NS
 
-  void _addMarker(LatLng position) {
+  getMarkers() async
+  {
+    final parkingList = await DatabaseController.instance().getAvailableParkingLots();
+    for (var parkingLot in parkingList) 
+    {
+      PlaceMarker(LatLng(parkingLot['latitude'] ,parkingLot['longitude']));
+    }
+  }
+  void PlaceMarker(LatLng position) {
     final markerId = MarkerId(position.toString());
     final marker = Marker(
       markerId: markerId,
@@ -25,7 +37,6 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
     );
 
     setState(() {
-      _markers.clear(); // Ensure only one marker exists
       _markers.add(marker);
     });
   }
@@ -38,6 +49,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
 
   @override
   Widget build(BuildContext context) {
+    getMarkers();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Map"),
@@ -52,7 +64,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
           _mapController = controller;
         },
         onTap: (position) {
-          _addMarker(position); // Add a marker at the tapped position
+          PlaceMarker(position); // Add a marker at the tapped position
         },
       ),
       floatingActionButton: FloatingActionButton(

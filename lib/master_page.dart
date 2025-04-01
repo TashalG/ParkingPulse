@@ -30,7 +30,7 @@ class _MasterPageState extends State< MasterPage> {
   
   @override
   Widget build(BuildContext context) {
-
+    getScreens();
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
@@ -46,7 +46,6 @@ class _MasterPageState extends State< MasterPage> {
         ],
         onTap: (index) {
           setState(() {
-            getScreens();
             _page = index;
             
           });
