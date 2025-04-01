@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:parkingpulse/controllers/database_controller.dart';
 import 'package:parkingpulse/functions/payment_func.dart';
 import 'package:parkingpulse/widget/google_map_widget.dart';
 
@@ -12,6 +15,13 @@ class PaymentWidget extends StatefulWidget {
 class _PaymentWidgetState extends State<PaymentWidget> {
   final GoogleMapWidget mapWidget = GoogleMapWidget();
   int lotId = 0;
+  double lotPrice = 0.0;
+  final dynamic database = DatabaseController.instance();
+  dynamic parkingLotList;
+
+  getParkingLots() async {
+    parkingLotList = await database.getAvailableParkingLots();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,25 +40,37 @@ class _PaymentWidgetState extends State<PaymentWidget> {
               children: [
                 SizedBox(width: 20),
                 Text('Spot ID: $lotId'),
-                Text('placeholder') // TODO
               ],
             ),
             Row(
               children: [
                 SizedBox(width: 20),
-                Text('Cost: '),
-                Text('\$/hr') // TODO
+                Text('Price: '),
+                Text('\$$lotPrice/hr')
               ],
             ),
             SizedBox(height: 20,),
-            ElevatedButton(
-              onPressed: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentInfoWidget()));
-                lotId = mapWidget.getCurrentMarkerId();
-                initPayment(currency: 'usd', amount: '50');
-                setState((){});
-              },
-              child: Text('Purchase Ticket'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              spacing: 30,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    lotId = mapWidget.getCurrentMarkerId();
+                    getParkingLots();
+                    dynamic currentLot = parkingLotList[lotId];
+                    lotPrice = currentLot['cost'];
+                    setState((){});
+                  },
+                  child: Text('Select Parking Lot'),
+                ),
+                ElevatedButton(
+                  onPressed: (){
+                    initPayment(currency: 'usd', amount: '1000');
+                  },
+                  child: Text('Purchase Ticket'),
+                ),
+              ],
             )
           ],
         ),

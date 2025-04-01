@@ -31,7 +31,14 @@ async {
     await Stripe.instance.presentPaymentSheet();
     if(jsonResponse["success"])
     {
-      //database controller
+      String uId = 'tempID';
+      int plate = 123;
+      String today = '2025-04-01';
+
+
+      final dynamic database = await DatabaseController.instance();
+
+      database.assignTicket(uId, plate, today);
     }
 
   }catch(e)
