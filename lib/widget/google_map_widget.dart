@@ -22,7 +22,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
     final parkingList = await DatabaseController.instance().getAvailableParkingLots();
     for (var parkingLot in parkingList) 
     {
-      PlaceMarker(LatLng(parkingLot['latitude'] ,parkingLot['longitude']),parkingLot['adress']);
+      PlaceMarker(LatLng(parkingLot['latitude'] ,parkingLot['longitude']),parkingLot['address']);
     }
   }
   void PlaceMarker(LatLng position, String _address) {
